@@ -2,7 +2,8 @@ import {FETCH_START} from '../actions/index'
 import { FETCH_SUCCESS } from '../actions/index';
 import {FETCH_FAIL } from '../actions/index'
 import {ADD_SMURF} from '../actions/index'
-
+import {ERROR_MESSAGE} from '../actions/index'
+import {SET_ERROR} from '../actions/index'
 const initialState = {
     smurfs : [],
     isLoading : false,
@@ -37,6 +38,12 @@ switch(action.type){
         return({
             ...state,
             smurfs: [...state.smurfs, newSmurf]
+        })
+
+    case(ERROR_MESSAGE):
+        return({
+             ...state,
+             error: action.payload
         })
     default: 
         return state;
