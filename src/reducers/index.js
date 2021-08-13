@@ -1,11 +1,15 @@
+import {FETCH_START} from '../actions/index'
+import { FETCH_SUCCESS } from '../actions/index';
+import {FETCH_FAIL } from '../actions/index'
+import {ADD_SMURF} from '../actions/index'
 
-export const initialState = {
+const initialState = {
     smurfs : [],
     isLoading : false,
     error: ''
 }
 
-const reducer = (state = initialState, action)=>{
+export const reducer = (state = initialState, action)=>{
 switch(action.type){
     case(FETCH_START):
      return({
@@ -26,11 +30,16 @@ switch(action.type){
         isLoading: false
     })
     case(ADD_SMURF):
+    const newSmurf = {
+        ...action.payload,
+        id:Date.now()
+    }
         return({
-            ...state
+            ...state,
+            smurfs: [...state.smurfs, newSmurf]
         })
     default: 
-    return state;
+        return state;
     }
 };
 
